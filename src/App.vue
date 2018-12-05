@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <header>
+      ユーザ名：{{ user.name }}
+    </header>
+    <button class="button is-primary" @click="rename">名前変更</button>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -7,6 +11,32 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        firstName: 'タロウ',
+        lastName: 'ヤマダ'
+      }
+    },
+    computed: {
+      fullName() {
+        return `${this.lastName} ${this.firstName}`
+      },
+      user() {
+        return this.$store.state.user
+      }
+      // firstName: 'タロウ',
+      // lastName: 'ヤマダ'
+    },
+    methods: {
+      rename() {
+        this.$store.commit('setName', 'みかんちゃん')
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
 #app {
